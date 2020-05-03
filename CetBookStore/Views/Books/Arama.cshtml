@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CetBookStore.Models.Book>
+
+@{
+    ViewData["Title"] = "Arama";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Arama</h1>
+<form class="form-inline" asp-controller="Books" asp-action="Arama" role="form">
+    <div class="form-group mb-2">
+        <label for="staticEmail2" class="col-form-label">Kategori</label>
+
+
+        @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.CategoriId, "Select Category",new {@class="form-control" })
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Min</label>
+            <input type="text" class="form-control" id="kucuk" name="kucuk" min="0" placeholder="Minumum">
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Max</label>
+            <input type="text" class="form-control" name="buyuk" id="buyuk" min="0" max="3000" placeholder="Maximum">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Filter</button>
+</form>
+<br />
+<hr />
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Authors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PressYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PressYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
